@@ -14,11 +14,12 @@ class KsiazkaAdresowa
 {
     UzytkownikManager uzytkownikManager;
     AdresatManager *adresatManager;
-    const string nazwaPlikuZAdresatami;
+    //const string nazwaPlikuZAdresatami;
+    const string NAZWA_PLIKU_Z_ADRESATAMI;
 
 public:
-    KsiazkaAdresowa(string NAZWA_PLIKU_Z_UZYTKOWNIKAMI, string NAZWA_PLIKU_Z_ADRESATAMI)
-     : uzytkownikManager(NAZWA_PLIKU_Z_UZYTKOWNIKAMI), nazwaPlikuZAdresatami(NAZWA_PLIKU_Z_ADRESATAMI) {};
+    KsiazkaAdresowa(string NAZWA_PLIKU_Z_UZYTKOWNIKAMI, string nazwaPlikuZAdresatami)
+     : uzytkownikManager(NAZWA_PLIKU_Z_UZYTKOWNIKAMI), NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) {};
     ~KsiazkaAdresowa()
     {
         delete adresatManager;

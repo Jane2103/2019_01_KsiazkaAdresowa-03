@@ -1,9 +1,14 @@
 #include <iostream>
+#include <windows.h>
+
+#include "KsiazkaAdresowa.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    KsiazkaAdresowa ksiazkaAdresowa("uzytkownicy.txt", "kontakty.txt");
+    ksiazkaAdresowa.wyswietlMenuPoStarcieProgramu();
+
     return 0;
 }

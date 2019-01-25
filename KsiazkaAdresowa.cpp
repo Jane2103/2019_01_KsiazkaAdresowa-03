@@ -10,7 +10,7 @@ void KsiazkaAdresowa::zalogujUzytkownika()
     uzytkownikManager.zalogujUzytkownika();
     if (uzytkownikManager.sprawdzCzyUzytkownikZalogowany())
     {
-        adresatManager = new AdresatManager(nazwaPlikuZAdresatami, uzytkownikManager.pobierzIdZalogowanegoUzytkownika());
+        adresatManager = new AdresatManager(NAZWA_PLIKU_Z_ADRESATAMI, uzytkownikManager.pobierzIdZalogowanegoUzytkownika());
         while (uzytkownikManager.sprawdzCzyUzytkownikZalogowany())
             wyswietlMenuPoZalogowaniu();
     }
