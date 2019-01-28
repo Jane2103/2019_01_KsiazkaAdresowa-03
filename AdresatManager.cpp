@@ -174,7 +174,7 @@ void AdresatManager::usunAdresata()
             }
             adresaci.erase(adresaci.begin() + indeksAdresataDoUsunieciaZWektora);
             //idUsunietegoAdresata = nrIdAdresataDoUsuniecia;
-            plikZAdresatami.usunAdresata(adresaci, nrIdAdresataDoUsuniecia, idZalogowanegoUzytkownika);
+            plikZAdresatami.usunAdresata(nrIdAdresataDoUsuniecia);
         }
         else
             system("cls");

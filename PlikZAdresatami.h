@@ -15,7 +15,7 @@ class PlikZAdresatami
 {
     const string nazwaPlikuZAdresatami;
     int idOstatniegoAdresata;
-    int idUsunietegoAdresata;
+    //int idUsunietegoAdresata;
 
     string przypiszDaneAdresataDoLinii(Adresat adresat);
     int sprawdzIdZalogowanegoUzytkownika(string liniaTekstu);
@@ -31,7 +31,7 @@ public:
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
 
     int pobierzIdOstatniegoAdresata();
-    void usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDoUsuniecia, int idZalogowanegoUzytkownika);
+    void usunAdresata(int nrIdAdresataDoUsuniecia);
     void edytujAdresata(Adresat edytowanyAdresat);
 
 };

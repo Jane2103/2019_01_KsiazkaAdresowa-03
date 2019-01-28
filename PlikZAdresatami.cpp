@@ -173,7 +173,8 @@ void PlikZAdresatami::dodajLinieDoPliku(fstream &plik, string liniaTekstu)
         plik << liniaTekstu << endl;
 }
 
-void PlikZAdresatami::usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDoUsuniecia, int idZalogowanegoUzytkownika)
+void PlikZAdresatami::usunAdresata(int nrIdAdresataDoUsuniecia)
+
 {
     fstream plikOryginalny, plikTymczasowy;
     string nazwaPlikuTymczasowego = "kontakty_tymczasowe.txt";
@@ -181,31 +182,15 @@ void PlikZAdresatami::usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDo
     plikTymczasowy.open(nazwaPlikuTymczasowego.c_str(), ios :: out);
 
     string liniaPlikuOryginalnego;
-    int rozmiarWektoraZAdresatami = adresaci.size();
-    int idUzytkownikaZLiniiPlikuOryginalnego;
     int idAdresataZLiniiPlikuOryginalnego;
 
     if (plikOryginalny.good() == true && plikTymczasowy.good() == true)
     {
         while (getline(plikOryginalny, liniaPlikuOryginalnego))
         {
-            //sprawdzany idUzytkownika z linii tekstu
-            idUzytkownikaZLiniiPlikuOryginalnego = sprawdzIdZalogowanegoUzytkownika(liniaPlikuOryginalnego);
             idAdresataZLiniiPlikuOryginalnego = sprawdzIdAdresata(liniaPlikuOryginalnego);
-            //jezeli idUzytkownika z linii tekstu jest rozne od idZalogowanegoUzytkownika to wpisujemy linie do pliku tymczasowego
-            if (idUzytkownikaZLiniiPlikuOryginalnego != idZalogowanegoUzytkownika)
+            if (idAdresataZLiniiPlikuOryginalnego != nrIdAdresataDoUsuniecia)
                 dodajLinieDoPliku(plikTymczasowy, liniaPlikuOryginalnego);
-            //jezeli idUzytkownika z linii tekstu jest takie jak idZalogowanegoUzytkownika to...
-            else if (idUzytkownikaZLiniiPlikuOryginalnego == idZalogowanegoUzytkownika)
-            {
-                //... sprawdzamy czy idAdresata pobrane z linii tekstu nalezy do pobranego vectora
-                for (int i = 0; i < rozmiarWektoraZAdresatami; i++)
-                {
-                    //jezeli nalezy to wpsujemy linie do pliku tymczasowego
-                    if (idAdresataZLiniiPlikuOryginalnego == adresaci[i].pobierzId())
-                        dodajLinieDoPliku(plikTymczasowy, liniaPlikuOryginalnego);
-                }
-            }
         }
         plikOryginalny.close();
         plikTymczasowy.close();
@@ -215,7 +200,6 @@ void PlikZAdresatami::usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDo
             cout << "Kontakty zostaly zaktualizowane!" << endl;
             idOstatniegoAdresata--;
         }
-
         else
             cout << "Blad zapisu." << endl;
     }
