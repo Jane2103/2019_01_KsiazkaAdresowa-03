@@ -211,7 +211,11 @@ void PlikZAdresatami::usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDo
         plikTymczasowy.close();
 
         if (zamienPlikiZKontaktami(nazwaPlikuTymczasowego))
+        {
             cout << "Kontakty zostaly zaktualizowane!" << endl;
+            idOstatniegoAdresata--;
+        }
+
         else
             cout << "Blad zapisu." << endl;
     }

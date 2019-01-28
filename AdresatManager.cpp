@@ -20,11 +20,12 @@ Adresat AdresatManager::podajDaneAdresata()
     string nowyAdres;
 
     //sprawdzamy czy numer usunietego adresata jest taki sam jak numer ostatniego adresata pobrany z pliku
-    if (idUsunietegoAdresata == plikZAdresatami.pobierzIdOstatniegoAdresata())
+    /*if (idUsunietegoAdresata == plikZAdresatami.pobierzIdOstatniegoAdresata())
         adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata());
     else
-        adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
+        adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);*/
 
+    adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
     adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
     cout << "Imie: ";
@@ -172,7 +173,7 @@ void AdresatManager::usunAdresata()
                     indeksAdresataDoUsunieciaZWektora = i;
             }
             adresaci.erase(adresaci.begin() + indeksAdresataDoUsunieciaZWektora);
-            idUsunietegoAdresata = nrIdAdresataDoUsuniecia;
+            //idUsunietegoAdresata = nrIdAdresataDoUsuniecia;
             plikZAdresatami.usunAdresata(adresaci, nrIdAdresataDoUsuniecia, idZalogowanegoUzytkownika);
         }
         else
@@ -222,6 +223,64 @@ Adresat AdresatManager::podajNoweAtrybutyAdresata(Adresat edytowanyAdresat)
     return adresat;
 
 }
+
+int AdresatManager::wyswietlMenuEdycjiKontaktu()
+{
+    int wyborUzytkownika;
+    cout << "\n\tMENU EDYCJI KONTAKTU" << endl;
+    cout << "------------------------------" << endl;
+    cout << "(1) imie" << endl;
+    cout << "(2) nazwisko" << endl;
+    cout << "(3) numer telefonu" << endl;
+    cout << "(4) email" << endl;
+    cout << "(5) adres" << endl;
+    cout << "(6) powrot do menu glownego" << endl;
+    cout << "------------------------------" << endl;
+    cout << "Twoj wybor: ";
+    cin >> wyborUzytkownika;
+    cout << "------------------------------" << endl;
+    if (wyborUzytkownika == 6)
+        system("cls");
+    return wyborUzytkownika;
+}
+
+/*void AdresatManager::edytujWybranyKontakt(int wyborUzytkownika)
+{
+    vector <Adresat> :: iterator it;
+    switch (wyborUzytkownika)
+    {
+    case 1:
+        string imie;
+        cout << "Zmien imie: ";
+        cin >> it -> ustawImie(imie);
+        cout << endl;
+        break;
+    case 2:
+        cout << "Zmien nazwisko: ";
+        cin >> it -> nazwisko;
+        cout << endl;
+        break;
+    case 3:
+        cout << "Zmien numer telefonu: ";
+        cin.sync();
+        getline(cin, it -> numerTelefonu);
+        cout << endl;
+        break;
+    case 4:
+        cout << "Zmien email: ";
+        cin.sync();
+        getline(cin, it -> email);
+        cout << endl;
+        break;
+    case 5:
+        cout << "Zmien adres: ";
+        cin.sync();
+        getline(cin, it -> adres);
+        cout << endl;
+        break;
+    }
+}*/
+
 void AdresatManager::edytujAdresata()
 {
     cout << "--------------------" << endl;
@@ -248,13 +307,54 @@ void AdresatManager::edytujAdresata()
             if (nrIdAdresataDoEdycji == it -> pobierzId())
             {
                 wyswietlDaneNaEkranie(*it);
-                Adresat edytowanyAdresat = podajNoweAtrybutyAdresata(*it);
+                int wyborUzytkownika = wyswietlMenuEdycjiKontaktu();
+                if (wyborUzytkownika != 6)
+                {
+                    switch (wyborUzytkownika)
+                    {
+                    case 1: {
+                        string imie;
+                        cout << "Podaj imie: ";
+                        cin >> imie;
+                        it -> ustawImie(imie);
+                        break; }
+                    case 2: {
+                        string nazwisko;
+                        cout << "Podaj nazwisko: ";
+                        cin >> nazwisko;
+                        it -> ustawNazwisko(nazwisko);
+                        break; }
+                    case 3: {
+                        string numerTelefonu;
+                        cout << "Podaj nr telefonu: ";
+                        cin.sync();
+                        getline(cin, numerTelefonu);
+                        it -> ustawNumerTelefonu(numerTelefonu);
+                        break; }
+                    case 4: {
+                        string email;
+                        cout << "Podaj email: ";
+                        cin.sync();
+                        getline(cin, email);
+                        it -> ustawEmail(email);
+                        break; }
+                    case 5: {
+                        string adres;
+                        cout << "Podaj adres: ";
+                        cin.sync();
+                        getline(cin, adres);
+                        it -> ustawAdres(adres);
+                        break; }
+                    }
+                }
+                //
+                //Adresat edytowanyAdresat = podajNoweAtrybutyAdresata(*it);
                 cout << endl;
                 cout << "Czy chcesz zapisac zmiany dla adresata?: (t/n) ";
                 cin >> znakOdpowiedzi;
                 if (znakOdpowiedzi == 't' || znakOdpowiedzi == 'T')
                 {
-                    *it = edytowanyAdresat;
+                    //*it = edytowanyAdresat;
                     plikZAdresatami.edytujAdresata(adresaci, nrIdAdresataDoEdycji, idZalogowanegoUzytkownika);
                     break;
                 }

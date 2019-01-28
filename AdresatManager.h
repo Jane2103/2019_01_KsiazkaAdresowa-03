@@ -34,6 +34,9 @@ public:
     void wyszukajAdresatowPoNazwisku();
     void usunAdresata();
     void edytujAdresata();
+
+    int wyswietlMenuEdycjiKontaktu();
+    void edytujWybranyKontakt(int wyborUzytkownika);
 };
 
 #endif
