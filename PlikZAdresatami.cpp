@@ -225,7 +225,7 @@ void PlikZAdresatami::usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDo
     system("pause");
 }
 
-void PlikZAdresatami::edytujAdresata(vector <Adresat> adresaci, int nrIdAdresataDoEdycji, int idZalogowanegoUzytkownika)
+void PlikZAdresatami::edytujAdresata(Adresat edytowanyAdresat)
 {
     fstream plikOryginalny, plikTymczasowy;
     string nazwaPlikuTymczasowego = "kontakty_tymczasowe.txt";
@@ -234,34 +234,21 @@ void PlikZAdresatami::edytujAdresata(vector <Adresat> adresaci, int nrIdAdresata
 
     string liniaPlikuOryginalnego;
     string liniaPlikuTymczasowego;
-    int rozmiarWektoraZAdresatami = adresaci.size();
-    int idUzytkownikaZLiniiPlikuOryginalnego;
+
     int idAdresataZLiniiPlikuOryginalnego;
 
     if (plikOryginalny.good() == true && plikTymczasowy.good() == true)
     {
         while (getline(plikOryginalny, liniaPlikuOryginalnego))
         {
-            idUzytkownikaZLiniiPlikuOryginalnego = sprawdzIdZalogowanegoUzytkownika(liniaPlikuOryginalnego);
             idAdresataZLiniiPlikuOryginalnego = sprawdzIdAdresata(liniaPlikuOryginalnego);
-            if (idUzytkownikaZLiniiPlikuOryginalnego != idZalogowanegoUzytkownika)
-                dodajLinieDoPliku(plikTymczasowy, liniaPlikuOryginalnego);
-            else if (idUzytkownikaZLiniiPlikuOryginalnego == idZalogowanegoUzytkownika)
+            if (idAdresataZLiniiPlikuOryginalnego == edytowanyAdresat.pobierzId())
             {
-                if (idAdresataZLiniiPlikuOryginalnego == nrIdAdresataDoEdycji)
-                {
-                    for (int i = 0; i < rozmiarWektoraZAdresatami; i++)
-                    {
-                        if (nrIdAdresataDoEdycji == adresaci[i].pobierzId())
-                        {
-                            liniaPlikuTymczasowego = przypiszDaneAdresataDoLinii(adresaci[i]);
-                            dodajLinieDoPliku(plikTymczasowy, liniaPlikuTymczasowego);
-                        }
-                    }
-                }
-                else
-                    dodajLinieDoPliku(plikTymczasowy, liniaPlikuOryginalnego);
+                liniaPlikuTymczasowego = przypiszDaneAdresataDoLinii(edytowanyAdresat);
+                dodajLinieDoPliku(plikTymczasowy, liniaPlikuTymczasowego);
             }
+            else
+                dodajLinieDoPliku(plikTymczasowy, liniaPlikuOryginalnego);
         }
         plikOryginalny.close();
         plikTymczasowy.close();

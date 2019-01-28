@@ -36,7 +36,7 @@ public:
     void edytujAdresata();
 
     int wyswietlMenuEdycjiKontaktu();
-    void edytujWybranyKontakt(int wyborUzytkownika);
+    void edytujWybranyKontakt(Adresat &edytowanyAdresat, int wyborUzytkownika);
 };
 
 #endif

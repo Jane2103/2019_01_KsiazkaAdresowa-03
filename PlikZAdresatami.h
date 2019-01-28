@@ -32,7 +32,7 @@ public:
 
     int pobierzIdOstatniegoAdresata();
     void usunAdresata(vector <Adresat> adresaci, int nrIdAdresataDoUsuniecia, int idZalogowanegoUzytkownika);
-    void edytujAdresata(vector <Adresat> adresaci, int nrIdAdresataDoEdycji, int idZalogowanegoUzytkownika);
+    void edytujAdresata(Adresat edytowanyAdresat);
 
 };
 
