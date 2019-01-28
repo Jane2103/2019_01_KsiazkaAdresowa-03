@@ -17,7 +17,6 @@ class AdresatManager
     int idUsunietegoAdresata;
 
     Adresat podajDaneAdresata();
-    Adresat podajNoweAtrybutyAdresata(Adresat edytowanyAdresat);
     void wyswietlDaneNaEkranie(Adresat adresat);
     bool sprawdzCzyAdresatOPodanymIdIstnieje(int nrIdAdresata);
 

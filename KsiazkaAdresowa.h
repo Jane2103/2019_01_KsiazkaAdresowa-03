@@ -14,7 +14,6 @@ class KsiazkaAdresowa
 {
     UzytkownikManager uzytkownikManager;
     AdresatManager *adresatManager;
-    //const string nazwaPlikuZAdresatami;
     const string NAZWA_PLIKU_Z_ADRESATAMI;
 
 public:

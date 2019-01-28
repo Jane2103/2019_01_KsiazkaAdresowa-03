@@ -19,12 +19,6 @@ Adresat AdresatManager::podajDaneAdresata()
     string nowyEmail;
     string nowyAdres;
 
-    //sprawdzamy czy numer usunietego adresata jest taki sam jak numer ostatniego adresata pobrany z pliku
-    /*if (idUsunietegoAdresata == plikZAdresatami.pobierzIdOstatniegoAdresata())
-        adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata());
-    else
-        adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);*/
-
     adresat.ustawIdAdresata(plikZAdresatami.pobierzIdOstatniegoAdresata() + 1);
     adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
@@ -173,7 +167,6 @@ void AdresatManager::usunAdresata()
                     indeksAdresataDoUsunieciaZWektora = i;
             }
             adresaci.erase(adresaci.begin() + indeksAdresataDoUsunieciaZWektora);
-            //idUsunietegoAdresata = nrIdAdresataDoUsuniecia;
             plikZAdresatami.usunAdresata(nrIdAdresataDoUsuniecia);
         }
         else
@@ -184,44 +177,6 @@ void AdresatManager::usunAdresata()
         cout << "Brak kontaktu o podanym ID dla zalogowanego uzytkownika." << endl;
         Sleep(1000);
     }
-}
-
-Adresat AdresatManager::podajNoweAtrybutyAdresata(Adresat edytowanyAdresat)
-{
-    Adresat adresat;
-    string noweImie;
-    string noweNazwisko;
-    string nowyNrTelefonu;
-    string nowyEmail;
-    string nowyAdres;
-
-    adresat.ustawIdAdresata(edytowanyAdresat.pobierzId());
-    adresat.ustawIdUzytkownika(edytowanyAdresat.pobierzIdUzytkownika());
-
-    cout << "Imie: ";
-    cin >> noweImie;
-    adresat.ustawImie(noweImie);
-
-    cout << "Nazwisko: ";
-    cin >> noweNazwisko;
-    adresat.ustawNazwisko(noweNazwisko);
-
-    cout << "Nr telefonu: ";
-    cin.sync();
-    getline(cin, nowyNrTelefonu);
-    adresat.ustawNumerTelefonu(nowyNrTelefonu);
-
-    cout << "Email: ";
-    cin >> nowyEmail;
-    adresat.ustawEmail(nowyEmail);
-
-    cout << "Adres: ";
-    cin.sync();
-    getline(cin, nowyAdres);
-    adresat.ustawAdres(nowyAdres);
-
-    return adresat;
-
 }
 
 int AdresatManager::wyswietlMenuEdycjiKontaktu()
@@ -249,7 +204,6 @@ int AdresatManager::wyswietlMenuEdycjiKontaktu()
 
 void AdresatManager::edytujWybranyKontakt(Adresat &edytowanyAdresat, int wyborUzytkownika)
 {
-    //vector <Adresat> :: iterator it;
     switch (wyborUzytkownika)
     {
     case 1:
